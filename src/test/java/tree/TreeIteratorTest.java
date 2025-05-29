@@ -1,10 +1,10 @@
 package tree;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import org.junit.jupiter.api.Test;
 
 /** Testing the {@link TreeIterator} class. */
 public class TreeIteratorTest {
@@ -15,12 +15,17 @@ public class TreeIteratorTest {
      * @param name dummy name
      * @param number dummy number (used for comparison)
      */
-    private record Dummy(String name, int number) implements Comparable<Dummy> {
+    private static class Dummy implements Comparable<Dummy> {
+        String name;
+        int number;
+        Dummy(String name, int number) {
+            this.name = name;
+            this.number = number;
+        }
         @Override
         public int compareTo(Dummy o) {
             return number - o.number;
         }
-
         @Override
         public String toString() {
             return name;
@@ -30,7 +35,10 @@ public class TreeIteratorTest {
     /** Ctor should not allow {@code null} data. */
     @Test
     public void testCtorRootNull() {
-        assertThrows(NullPointerException.class, () -> new TreeIterator<>(null));
+        try {
+            new TreeIterator<>(null);
+            fail();
+        } catch (NullPointerException ex) {}
     }
 
     /** Iterating over empty tree. */
@@ -41,7 +49,10 @@ public class TreeIteratorTest {
         Iterator<Dummy> i = new TreeIterator<>(e);
 
         assertFalse(i.hasNext());
-        assertThrows(NoSuchElementException.class, i::next);
+        try {
+            i.next();
+            fail();
+        } catch (NoSuchElementException ex) {}
     }
 
     /** Iterating over single node. */
@@ -58,7 +69,10 @@ public class TreeIteratorTest {
         assertEquals(c, i.next());
 
         assertFalse(i.hasNext());
-        assertThrows(NoSuchElementException.class, i::next);
+        try {
+            i.next();
+            fail();
+        } catch (NoSuchElementException ex) {}
     }
 
     /** Iterating over simple tree. */
@@ -86,7 +100,10 @@ public class TreeIteratorTest {
         assertEquals(c1, i.next());
 
         assertFalse(i.hasNext());
-        assertThrows(NoSuchElementException.class, i::next);
+        try {
+            i.next();
+            fail();
+        } catch (NoSuchElementException ex) {}
     }
 
     /** Iterating over simple tree. */
@@ -114,7 +131,10 @@ public class TreeIteratorTest {
         assertEquals(c1, i.next());
 
         assertFalse(i.hasNext());
-        assertThrows(NoSuchElementException.class, i::next);
+        try {
+            i.next();
+            fail();
+        } catch (NoSuchElementException ex) {}
     }
 
     /** Iterating over simple tree. */
@@ -142,7 +162,10 @@ public class TreeIteratorTest {
         assertEquals(c2, i.next());
 
         assertFalse(i.hasNext());
-        assertThrows(NoSuchElementException.class, i::next);
+        try {
+            i.next();
+            fail();
+        } catch (NoSuchElementException ex) {}
     }
 
     /** Iterating over simple tree. */
@@ -170,6 +193,9 @@ public class TreeIteratorTest {
         assertEquals(c3, i.next());
 
         assertFalse(i.hasNext());
-        assertThrows(NoSuchElementException.class, i::next);
+        try {
+            i.next();
+            fail();
+        } catch (NoSuchElementException ex) {}
     }
 }
