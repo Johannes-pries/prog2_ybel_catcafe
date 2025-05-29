@@ -37,9 +37,9 @@ public class CatCafe {
      * @return cat with the given name
      */
     public Optional<FelineOverLord> getCatByName(String name) {
-        if (name == null) return null;
+        if (name == null) return Optional.empty();
 
-        return Optional.ofNullable(clowder.stream().filter(cat -> cat.name().equals(name)).findFirst().get());
+        return clowder.stream().filter(cat -> cat.name().equals(name)).findFirst();
     }
 
     /**
@@ -50,13 +50,15 @@ public class CatCafe {
      * @return cat within the weight limits
      */
     public Optional<FelineOverLord> getCatByWeight(int minWeight, int maxWeight) {
-        if (minWeight < 0) return null;
-        if (maxWeight < minWeight) return null;
+        if (minWeight < 0) return Optional.empty();
+        if (maxWeight < minWeight) return Optional.empty();
 
-        return Optional.ofNullable(clowder.stream()
-                                        .filter(cat -> cat.weight()>= minWeight && cat.weight() < maxWeight)
-                                        .findFirst()
-                                        .get());
+        System.out.println(clowder.stream()
+                .filter(cat -> cat.weight() >= minWeight && cat.weight() < maxWeight)
+                .findFirst());
+        return clowder.stream()
+                      .filter(cat -> cat.weight() >= minWeight && cat.weight() < maxWeight)
+                      .findFirst();
     }
 
     /**
