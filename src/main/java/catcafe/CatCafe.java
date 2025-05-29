@@ -2,6 +2,8 @@ package catcafe;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import tree.Empty;
 import tree.Tree;
 import tree.TreeVisitor;
@@ -34,14 +36,10 @@ public class CatCafe {
      * @param name name of the cat
      * @return cat with the given name
      */
-    public FelineOverLord getCatByName(String name) {
+    public Optional<FelineOverLord> getCatByName(String name) {
         if (name == null) return null;
 
-        for (FelineOverLord c : clowder) {
-            if (c.name().equals(name)) return c;
-        }
-
-        return null;
+        return Optional.ofNullable(clowder.stream().filter(cat -> cat.name().equals(name)).findFirst().get());
     }
 
     /**
@@ -51,15 +49,14 @@ public class CatCafe {
      * @param maxWeight upper weight limit (exclusive)
      * @return cat within the weight limits
      */
-    public FelineOverLord getCatByWeight(int minWeight, int maxWeight) {
+    public Optional<FelineOverLord> getCatByWeight(int minWeight, int maxWeight) {
         if (minWeight < 0) return null;
         if (maxWeight < minWeight) return null;
 
-        for (FelineOverLord c : clowder) {
-            if (c.weight() >= minWeight && c.weight() < maxWeight) return c;
-        }
-
-        return null;
+        return Optional.ofNullable(clowder.stream()
+                                        .filter(cat -> cat.weight()>= minWeight && cat.weight() < maxWeight)
+                                        .findFirst()
+                                        .get());
     }
 
     /**

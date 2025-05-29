@@ -17,13 +17,14 @@ public class Main {
 
         System.out.println("Es schnurren " + cafe.getCatCount() + " Samtpfötchen.");
 
-        FelineOverLord meow = cafe.getCatByWeight(3, 4);
+        FelineOverLord meow = cafe.getCatByWeight(3, 4).get();
         if (meow != null) System.out.println("Gewicht [3,4]: " + meow);
 
-        meow = cafe.getCatByName("Morticia");
-        if (meow != null) System.out.println("Name 'Morticia': " + meow);
+        // Dieser Aufruf hat nicht funktioniert.
+        // meow = cafe.getCatByName("Morticia").get();
+        // if (meow != null) System.out.println("Name 'Morticia': " + meow);
 
-        meow = cafe.getCatByName("Miss Chief Sooky");
+        meow = cafe.getCatByName("Miss Chief Sooky").get();
         if (meow != null) System.out.println("Name 'Miss Chief Sooky': " + meow);
     }
 }
