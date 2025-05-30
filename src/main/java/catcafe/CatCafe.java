@@ -53,9 +53,9 @@ public class CatCafe {
         if (minWeight < 0) return Optional.empty();
         if (maxWeight < minWeight) return Optional.empty();
 
-        System.out.println(clowder.stream()
-                .filter(cat -> cat.weight() >= minWeight && cat.weight() < maxWeight)
-                .findFirst());
+        // System.out.println(clowder.stream()
+        //         .filter(cat -> cat.weight() >= minWeight && cat.weight() < maxWeight)
+        //         .findFirst());
         return clowder.stream()
                       .filter(cat -> cat.weight() >= minWeight && cat.weight() < maxWeight)
                       .findFirst();
